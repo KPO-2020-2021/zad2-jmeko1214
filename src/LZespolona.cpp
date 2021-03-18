@@ -1,5 +1,8 @@
 #include "LZespolona.hh"
 #include <cmath>
+#include <iostream>
+
+using namespace std;
 
 #define MIN_DIFF 0.00001
 
@@ -12,7 +15,8 @@
  *    True dla równych liczb zespolonych.
  */
 
-bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
+bool  operator == (LZespolona  Skl1,  LZespolona  Skl2)
+{
   if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
     return true;
   else
@@ -24,6 +28,14 @@ bool  operator == (LZespolona  Skl1,  LZespolona  Skl2){
   else
     return false;
   */
+}
+
+bool  operator != (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  if (Skl1 == Skl2)
+    return false;
+  else
+    return true;
 }
 
 /*!
@@ -42,6 +54,23 @@ LZespolona  operator + (LZespolona  Skl1,  LZespolona  Skl2){
   return Wynik;
 }
 
+LZespolona  operator - (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  LZespolona  Wynik;
+
+  Wynik.re = Skl1.re - Skl2.re;
+  Wynik.im = Skl1.im - Skl2.im;
+  return Wynik;
+}
+
+LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  LZespolona  Wynik;
+
+  Wynik.re = Skl1.re * Skl2.re - Skl1.im * Skl2.im;
+  Wynik.im = Skl1.re * Skl2.im + Skl1.im * Skl2.re;
+  return Wynik;
+}
 
 /*!
  * Realizuje dzielenie liczby zespolonej przez skakar.
@@ -57,4 +86,87 @@ LZespolona  operator / (LZespolona  Skl1,  double  Skl2){
   Wynik.re = Skl1.re / Skl2;
   Wynik.im = Skl1.im / Skl2;
   return Wynik;
+}
+
+LZespolona sprzezenie (LZespolona Skl)
+{
+  LZespolona Wynik;
+  Wynik.re = Skl.re;
+  Wynik.im = -Skl.im;
+  return Wynik;
+}
+
+double modul2 (LZespolona Skl)
+{
+  double Wynik;
+  Wynik=Skl.re*Skl.re + Skl.im*Skl.im;
+  return Wynik;
+}
+
+LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2)
+{
+  LZespolona  Wynik;
+  if(modul2(Skl2)==0)
+    {
+      cout<<"Blad! Nie mozna dzielic przez 0!"<<endl;
+    }
+  else
+    {
+      Wynik = (Skl1*sprzezenie(Skl2))/(modul2(Skl2));
+    }
+  return Wynik;
+}
+
+/*przeciozenie operatora wswietlania*/
+ostream & operator << (ostream &StrmWyj, const LZespolona &LZesp)
+{
+  StrmWyj << "(" << LZesp.re << showpos << LZesp.im <<noshowpos<<"i)"<<endl;
+  return StrmWyj;
+}
+
+/*przeciozenie operatora wczytania*/
+istream & operator >> (istream &StrmWej, LZespolona &LZesp)
+{
+  char nawias, litera;
+  StrmWej >> nawias;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  if(nawias != '(')
+    {
+      StrmWej.setstate(ios::failbit);
+      return StrmWej;
+    }
+  StrmWej >> LZesp.re;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  StrmWej >> LZesp.im;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  StrmWej >> litera;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  if(litera != 'i')
+    {
+      StrmWej.setstate(ios::failbit);
+      return StrmWej;
+    }
+  StrmWej >> nawias;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  if(nawias != ')')
+    {
+      StrmWej.setstate(ios::failbit);
+      return StrmWej;
+    }
+  return StrmWej;  
 }
