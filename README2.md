@@ -1,0 +1,1 @@
+Mam dziwny problem, przy próbie kompilacji pokazuje mi błąd że czegoś mi brakuje przed using i nie mam pojęcia dlaczego przez co próby dalszej pracy nad programem są niezbyt owocne.

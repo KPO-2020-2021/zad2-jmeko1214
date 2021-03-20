@@ -1,6 +1,7 @@
 #include "LZespolona.hh"
 #include <cmath>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -14,6 +15,11 @@ using namespace std;
  * Zwraca:
  *    True dla równych liczb zespolonych.
  */
+
+void Wyswietl(LZespolona  WyrZ)
+{
+  cout << "(" << WyrZ.re << showpos << WyrZ.im << "i)" << noshowpos;
+}
 
 bool  operator == (LZespolona  Skl1,  LZespolona  Skl2)
 {
@@ -167,6 +173,11 @@ istream & operator >> (istream &StrmWej, LZespolona &LZesp)
     {
       StrmWej.setstate(ios::failbit);
       return StrmWej;
+    }
+  if(StrmWej.rdstate()==ios::failbit)
+    {
+      cerr<<"Blad zapisu liczby zespolonej!"<<endl;
+      exit(0);
     }
   return StrmWej;  
 }

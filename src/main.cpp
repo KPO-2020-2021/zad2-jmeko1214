@@ -1,9 +1,9 @@
 #include <iostream>
 #include "BazaTestu.hh"
+#include "LZespolona.hh"
+#include "WyrazenieZesp.hh"
 
 using namespace std;
-
-
 
 
 int main(int argc, char **argv)
@@ -25,18 +25,25 @@ int main(int argc, char **argv)
     return 1;
   }
 
-
   
   cout << endl;
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
 
   WyrazenieZesp   WyrZ_PytanieTestowe;
+  LZespolona TwojaOdp;
+  LZespolona Wynik;
   
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
-    cout << " Czesc rzeczywista pierwszego argumentu: ";
-    cout << WyrZ_PytanieTestowe.Arg1.re << endl;
-  }
+  
+  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe))
+    {
+      cout << ":? Podaj wynik operacji: "<< WyrZ_PytanieTestowe << " =";
+      Wynik = Oblicz(WyrZ_PytanieTestowe);
+      cout << "   Twoja odpowiedz: ";
+      cin>> TwojaOdp;
+      cout << endl;
+
+    }
 
   
   cout << endl;

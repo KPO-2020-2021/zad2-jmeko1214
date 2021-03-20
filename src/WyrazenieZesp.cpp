@@ -1,5 +1,8 @@
-#include "WyrazenieZesp.hh"
 #include <iostream>
+#include <cstdlib>
+#include "WyrazenieZesp.hh"
+#include "LZespolona.hh"
+
 
 using namespace std;
 
@@ -7,11 +10,32 @@ using namespace std;
  * Tu nalezy zdefiniowac funkcje, ktorych zapowiedzi znajduja sie
  * w pliku naglowkowym.
  */
-
+/*
 void Wyswietl(WyrazenieZesp WyrZ)
 {
-  cout << LZespolona << WyrZ << endl;
-}
+  if(WyrZ.Arg1.re==0)
+    {
+      if(WyrZ.Arg1.im==0)
+	{
+	  cout<<"0";
+	}
+      else
+	{
+	  cout<<"("<<showpos<<WyrZ.Arg1.im<<noshowpos<<"i)";
+	}
+    }
+  else
+    {
+      if(WyrZ.Arg1.im==0)
+	{
+	  cout<<"("<<WyrZ.Arg1.re<<")";
+	}
+      else
+	{
+	  cout<<"("<<WyrZ.Arg1.re<<showpos<<WyrZ.Arg1.im<<noshowpos<<"i)";
+	}
+    }
+    }*/
 
 LZespolona Oblicz(WyrazenieZesp  WyrZ)
 {
@@ -20,25 +44,25 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ)
     {
     case Operator::Op_Dodaj:
       {
-	Wynik=WyrZ.Arg1+WyrZ.Arg2;
+	Wynik= operator +(WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
     case Operator::Op_Odejmij:
       {
-	Wynik=WyrZ.Arg1-WyrZ.Arg2;
+        Wynik= operator -(WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
     case Operator::Op_Mnoz:
       {
-	Wynik=WyrZ.Arg1*WyrZ.Arg2;
+        Wynik= operator *(WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
     case Operator::Op_Dziel:
       {
-	Wynik=WyrZ.Arg1/WyrZ.Arg2;
+        Wynik= operator /(WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
@@ -52,4 +76,96 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ)
       }
     }
 
+}
+
+ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & operacja)
+{
+  StrmWyj << operacja.Arg1;
+  if(StrmWyj.fail())
+    {
+      return StrmWyj;
+    }
+  if(operacja.Op==Operator::Op_Dodaj)
+    {
+      StrmWyj << "+";
+    }
+  else if(operacja.Op==Operator::Op_Odejmij)
+    {
+      StrmWyj << "-";
+    }
+  else if(operacja.Op==Operator::Op_Mnoz)
+    {
+      StrmWyj << "*";
+    }
+  else if(operacja.Op==Operator::Op_Dziel)
+    {
+      StrmWyj << "/";
+    }
+  if(StrmWyj.fail())
+    {
+      return StrmWyj;
+    }
+  StrmWyj << operacja.Arg2;
+  if(StrmWyj.fail())
+    {
+      return StrmWyj;
+    }
+  return StrmWyj;
+ 
+}
+
+istream & operator >> (istream & StrmWej, Operator & Op)
+{
+  char znak;
+  StrmWej >> znak;
+  switch(znak)
+    {
+    case '+':
+      {
+	Op = Op_Dodaj;
+	break;
+      }
+    case '-':
+      {
+        Op = Op_Odejmij;
+	break;
+      }
+    case '*':
+      {
+        Op = Op_Mnoz;
+	break;
+      }
+    case '/':
+      {
+        Op = Op_Dziel;
+	break;
+      }
+    default:
+      {
+	StrmWej.setstate(ios::failbit);
+	return StrmWej;
+      }
+    }
+  return StrmWej;
+}
+
+
+istream & operator >> (istream & StrmWej, WyrazenieZesp & wyraz)
+{
+  StrmWej >> wyraz.Arg1;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  StrmWej >> wyraz.Op;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  StrmWej >> wyraz.Arg2;
+  if(StrmWej.fail())
+    {
+      return StrmWej;
+    }
+  return StrmWej;
 }
