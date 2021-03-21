@@ -37,14 +37,34 @@ int main(int argc, char **argv)
   
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe))
     {
-      cout << ":? Podaj wynik operacji: "<< WyrZ_PytanieTestowe << " =";
-      Wynik = Oblicz(WyrZ_PytanieTestowe);
+      cout << ":? Podaj wynik operacji: "<< endl;
+      cout << WyrZ_PytanieTestowe;
+      cout << " = ";
+      // Wynik = Oblicz(WyrZ_PytanieTestowe);
       cout << "   Twoja odpowiedz: ";
-      cin>> TwojaOdp;
-      cout << endl;
-
+      for(int i=0; i<3; i++)   //pozwolenie na wprowadzenie 3 razy odpowiedzi
+	{                      //w przypadku zlej formy wpisanej liczby zespolonej
+	  cin>> TwojaOdp;
+	  if(cin.fail())
+	    {
+	      cout << endl;
+	      cout<<"  Blad zapisu liczby zespolonej. Sprobuj jeszcze raz."<<endl;
+	      cout<< endl << "   Twoja odpowiedz: ";
+	      cin.clear();
+	      cin.ignore(500, '\n');
+	    }
+	  else break;
+	}
+      if(TwojaOdp==Oblicz(WyrZ_PytanieTestowe))
+	{
+	  cout<< ":) Odpowiedz poprawna" << endl << endl;
+        }
+      else if(TwojaOdp!=Oblicz(WyrZ_PytanieTestowe))
+	{
+	  Wynik=Oblicz(WyrZ_PytanieTestowe);
+	  cout<< ":( Blad. Prawidlowym wynikiem jest: " << Wynik << endl;
+	}
     }
-
   
   cout << endl;
   cout << " Koniec testu" << endl;

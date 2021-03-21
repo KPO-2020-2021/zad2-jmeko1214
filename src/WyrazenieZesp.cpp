@@ -44,25 +44,25 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ)
     {
     case Operator::Op_Dodaj:
       {
-	Wynik= operator +(WyrZ.Arg1,WyrZ.Arg2);
+	Wynik= operator + (WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
     case Operator::Op_Odejmij:
       {
-        Wynik= operator -(WyrZ.Arg1,WyrZ.Arg2);
+        Wynik= operator - (WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
     case Operator::Op_Mnoz:
       {
-        Wynik= operator *(WyrZ.Arg1,WyrZ.Arg2);
+        Wynik= operator * (WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
     case Operator::Op_Dziel:
       {
-        Wynik= operator /(WyrZ.Arg1,WyrZ.Arg2);
+        Wynik= operator / (WyrZ.Arg1,WyrZ.Arg2);
 	return Wynik;
 	break;
       }
@@ -78,26 +78,26 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ)
 
 }
 
-ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & operacja)
+ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & LZesp)
 {
-  StrmWyj << operacja.Arg1;
+  StrmWyj << LZesp.Arg1;
   if(StrmWyj.fail())
     {
       return StrmWyj;
     }
-  if(operacja.Op==Operator::Op_Dodaj)
+  if(LZesp.Op==Operator::Op_Dodaj)
     {
       StrmWyj << "+";
     }
-  else if(operacja.Op==Operator::Op_Odejmij)
+  else if(LZesp.Op==Operator::Op_Odejmij)
     {
       StrmWyj << "-";
     }
-  else if(operacja.Op==Operator::Op_Mnoz)
+  else if(LZesp.Op==Operator::Op_Mnoz)
     {
       StrmWyj << "*";
     }
-  else if(operacja.Op==Operator::Op_Dziel)
+  else if(LZesp.Op==Operator::Op_Dziel)
     {
       StrmWyj << "/";
     }
@@ -105,7 +105,7 @@ ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & operacja)
     {
       return StrmWyj;
     }
-  StrmWyj << operacja.Arg2;
+  StrmWyj << LZesp.Arg2;
   if(StrmWyj.fail())
     {
       return StrmWyj;

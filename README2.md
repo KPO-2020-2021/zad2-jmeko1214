@@ -1,1 +1,6 @@
-Mam dziwny problem, przy próbie kompilacji pokazuje mi błąd że czegoś mi brakuje przed using i nie mam pojęcia dlaczego przez co próby dalszej pracy nad programem są niezbyt owocne.
+Dziękuję jeszcze raz za pomoc z zapomnieniem przeze mnie ';'. Błąd naprawiony, dodana opcja potrójnego wprowadzenia danych w przypadku kiedy wprowadzona liczba nie jest postaci (a+bi)/(a-bi).
+
+Przy uruchamianiu programu są opcje: ./test_arytm_zesp latwy lub ./test_arytm_zesp trudny
+
+Przy wpisaniu błędnego wyniku program pokazuje wynik poprawny.
+

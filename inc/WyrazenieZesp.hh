@@ -32,8 +32,8 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ);
 
 /*przeciazenia operatorow*/
 istream & operator >> (istream & StrmWej, WyrazenieZesp & wyraz);
-ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & operacja);
+ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & LZesp);
 
-istream & operator >> (istream & StrmWej, Operator & Op)
+istream & operator >> (istream & StrmWej, Operator & Op);
 
 #endif
