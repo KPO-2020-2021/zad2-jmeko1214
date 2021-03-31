@@ -2,6 +2,7 @@
 #include "BazaTestu.hh"
 #include "LZespolona.hh"
 #include "WyrazenieZesp.hh"
+#include "Statystyki.hh"
 
 using namespace std;
 
@@ -33,14 +34,16 @@ int main(int argc, char **argv)
   WyrazenieZesp   WyrZ_PytanieTestowe;
   LZespolona TwojaOdp;
   LZespolona Wynik;
+  Statystyka Test;
+
+  Inicjuj_staty(Test);
   
   
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe))
     {
-      cout << ":? Podaj wynik operacji: "<< endl;
+      cout << ":? Podaj wynik operacji: ";
       cout << WyrZ_PytanieTestowe;
-      cout << " = ";
-      // Wynik = Oblicz(WyrZ_PytanieTestowe);
+      cout << " = " << endl;
       cout << "   Twoja odpowiedz: ";
       for(int i=0; i<3; i++)   //pozwolenie na wprowadzenie 3 razy odpowiedzi
 	{                      //w przypadku zlej formy wpisanej liczby zespolonej
@@ -58,16 +61,22 @@ int main(int argc, char **argv)
       if(TwojaOdp==Oblicz(WyrZ_PytanieTestowe))
 	{
 	  cout<< ":) Odpowiedz poprawna" << endl << endl;
+	  Dodaj_dobra(Test);
+	  cin.clear();
         }
       else if(TwojaOdp!=Oblicz(WyrZ_PytanieTestowe))
 	{
 	  Wynik=Oblicz(WyrZ_PytanieTestowe);
 	  cout<< ":( Blad. Prawidlowym wynikiem jest: " << Wynik << endl;
+	  Dodaj_zla(Test);
+	  cin.clear();
 	}
     }
   
   cout << endl;
-  cout << " Koniec testu" << endl;
+  cout << "Koniec testu" << endl;
+  cout << endl;
+  Wyswietl_statystyki(Test);
   cout << endl;
 
 }

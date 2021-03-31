@@ -1,11 +1,12 @@
 #include "LZespolona.hh"
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 using namespace std;
 
-#define MIN_DIFF 0.00001
+#define MIN_DIFF 0.0001
 
 /*!
  * Realizuje porównanie dwoch liczb zespolonych.
@@ -18,22 +19,20 @@ using namespace std;
 
 void Wyswietl(LZespolona  WyrZ)
 {
-  cout << "(" << WyrZ.re << showpos << WyrZ.im << "i)" << noshowpos;
+  cout << " (" << WyrZ.re << showpos << WyrZ.im << "i) " << noshowpos;
 }
 
 bool  operator == (LZespolona  Skl1,  LZespolona  Skl2)
 {
-  if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
+  /*if ((Skl1.re == Skl2.re) && (Skl1.im == Skl2.im))
     return true;
   else
-    return false;
+  return false;*/
   //alternatywnie, dla MIN_DIFF i wyników od użytkownika
-  /*
-  if abs(Skl1.re - Skl2.re) <= MIN_DIFF && abs(Skl1.im - Skl2.im) <= MIN_DIFF
+  if(abs(Skl1.re - Skl2.re) <= MIN_DIFF && abs(Skl1.im - Skl2.im) <= MIN_DIFF)
     return true;
   else
     return false;
-  */
 }
 
 bool  operator != (LZespolona  Skl1,  LZespolona  Skl2)
@@ -88,24 +87,30 @@ LZespolona  operator * (LZespolona  Skl1,  LZespolona  Skl2)
  */
 LZespolona  operator / (LZespolona  Skl1,  double  Skl2){
   LZespolona  Wynik;
-
-  Wynik.re = Skl1.re / Skl2;
-  Wynik.im = Skl1.im / Skl2;
+  if(Skl2==0)
+    {
+      cout<<"Blad! Nie mozna dzielic przez 0!"<<endl;
+    }
+  else
+    {
+      Wynik.re = Skl1.re / Skl2;
+      Wynik.im = Skl1.im / Skl2;
+    }
   return Wynik;
 }
 
-LZespolona sprzezenie (LZespolona Skl)
+LZespolona sprzezenie (LZespolona Skl2)
 {
   LZespolona Wynik;
-  Wynik.re = Skl.re;
-  Wynik.im = -Skl.im;
+  Wynik.re = Skl2.re;
+  Wynik.im = -Skl2.im;
   return Wynik;
 }
 
-double modul2 (LZespolona Skl)
+double modul2 (LZespolona Skl2)
 {
   double Wynik;
-  Wynik=Skl.re*Skl.re + Skl.im*Skl.im;
+  Wynik = (Skl2.re*Skl2.re) + (Skl2.im*Skl2.im);
   return Wynik;
 }
 
@@ -126,7 +131,7 @@ LZespolona  operator / (LZespolona  Skl1,  LZespolona  Skl2)
 /*przeciozenie operatora wswietlania*/
 ostream & operator << (ostream &StrmWyj, const LZespolona &LZesp)
 {
-  StrmWyj << "(" << LZesp.re << showpos << LZesp.im <<noshowpos<<"i)"<<endl;
+  StrmWyj << setprecision(4)<< "(" << LZesp.re << showpos << LZesp.im <<noshowpos<<"i)";
   return StrmWyj;
 }
 
