@@ -7,6 +7,7 @@
 using namespace std;
 
 #define MIN_DIFF 0.0001
+#define PI 3.141592
 
 /*!
  * Realizuje porównanie dwoch liczb zespolonych.
@@ -186,3 +187,59 @@ istream & operator >> (istream &StrmWej, LZespolona &LZesp)
     }
   return StrmWej;  
 }
+
+double arg(LZespolona Skl1)
+{
+  double Wynik;
+  if(Skl1.re>0)
+    {
+      Wynik = atan2(Skl1.im, Skl1.re);
+    }
+  else if(Skl1.re<0)
+    {
+      Wynik = atan2(Skl1.re, Skl1.im);
+    }
+  else if(Skl1.re==0)
+    {
+      if(Skl1.im>0)
+	{
+	  Wynik = PI/2;
+	}
+      else if(Skl1.im<0)
+	{
+	  Wynik = -(PI/2);
+	}
+      else if(Skl1.im==0)
+	{
+	  Wynik = 0;
+	}
+    }
+  return Wynik;
+}
+
+LZespolona operator += (LZespolona &Skl1, LZespolona const &Skl2)
+{
+  LZespolona  Wynik;
+
+  Skl1.re = Skl1.re + Skl2.re;
+  Skl1.im = Skl1.im + Skl2.im;
+  Wynik = Skl1;
+  
+  return Wynik;
+}
+
+LZespolona operator /= (LZespolona &Skl1, LZespolona const &Skl2)
+{
+  LZespolona  Wynik;
+  if(modul2(Skl2)==0)
+    {
+      cout<<"Blad! Nie mozna dzielic przez 0!"<<endl;
+    }
+  else
+    {
+      Skl1 = (Skl1*sprzezenie(Skl2))/(modul2(Skl2));
+      Wynik = Skl1;
+    }
+  return Wynik;
+}
+

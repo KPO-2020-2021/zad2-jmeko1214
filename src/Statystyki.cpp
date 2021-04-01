@@ -29,7 +29,10 @@ Statystyka Dodaj_zla(Statystyka & Test)
 double Procent_dobrych(Statystyka & Test)
 {
   double Procent;
-  Procent = (Test.liczba_dobrych/Test.liczba_odp)*100;
+  if(Test.liczba_odp!=0)
+    {
+        Procent = ((double)Test.liczba_dobrych/(double)Test.liczba_odp)*100;
+    }
   return Procent;
 }
 

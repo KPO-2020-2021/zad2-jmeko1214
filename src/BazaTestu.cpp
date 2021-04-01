@@ -14,6 +14,8 @@ static WyrazenieZesp  TestLatwy[] =
     {{1,0}, Op_Odejmij, {0,1}},
     {{3,0}, Op_Mnoz, {0,3}},
     {{4,8}, Op_Dziel, {1,0}},
+    {{2,1}, Op_PlusRowna, {1,2}},
+    {{4,8}, Op_DzielRowna, {1,0}},
   };
 
 /*
@@ -25,6 +27,8 @@ static WyrazenieZesp  TestTrudny[] =
     {{2,0}, Op_Odejmij, {4,-1}},
     {{-3,1}, Op_Mnoz, {3,3}},
     {{5,8}, Op_Dziel, {-1,0}},
+    {{-2,4}, Op_PlusRowna, {3,2}},
+    {{5,8}, Op_DzielRowna, {-1,0}},
   };
 
 

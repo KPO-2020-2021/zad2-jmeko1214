@@ -66,6 +66,18 @@ LZespolona Oblicz(WyrazenieZesp  WyrZ)
 	return Wynik;
 	break;
       }
+    case Operator::Op_PlusRowna:
+      {
+        Wynik= operator += (WyrZ.Arg1,WyrZ.Arg2);
+	return Wynik;
+	break;
+      }
+    case Operator::Op_DzielRowna:
+      {
+        Wynik= operator /= (WyrZ.Arg1,WyrZ.Arg2);
+	return Wynik;
+	break;
+      }
     default:
       {
 	cout<<"Nie rozpoznano dzialania"<<endl;
@@ -101,6 +113,14 @@ ostream & operator << (ostream & StrmWyj, const WyrazenieZesp & LZesp)
     {
       StrmWyj << "/";
     }
+  else if(LZesp.Op==Operator::Op_PlusRowna)
+    {
+      StrmWyj << "+=";
+    }
+  else if(LZesp.Op==Operator::Op_DzielRowna)
+    {
+      StrmWyj << "/=";
+    }
   if(StrmWyj.fail())
     {
       return StrmWyj;
@@ -122,8 +142,19 @@ istream & operator >> (istream & StrmWej, Operator & Op)
     {
     case '+':
       {
-	Op = Op_Dodaj;
-	break;
+	switch(znak)
+	  {
+	  case' ':
+	    {
+	      Op = Op_Dodaj;
+	      break;
+	    }
+	  case '=':
+	    {
+	      Op = Op_PlusRowna;
+	      break;
+	    }
+	  }
       }
     case '-':
       {
@@ -137,9 +168,20 @@ istream & operator >> (istream & StrmWej, Operator & Op)
       }
     case '/':
       {
-        Op = Op_Dziel;
-	break;
-      }
+	switch(znak)
+	  {
+	  case ' ':
+	    {
+	      Op = Op_Dziel;
+	      break;
+	    }
+	  case '=':
+	    {
+	      Op = Op_DzielRowna;
+	      break;
+	    }
+	  }
+      }      
     default:
       {
 	StrmWej.setstate(ios::failbit);

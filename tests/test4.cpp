@@ -7,15 +7,10 @@ TEST_CASE("test Statystyka - obliczanie procent"){
   Statystyka Test;
   double y=50.0;
   Test.liczba_dobrych=2;
+  std::cout<<Test.liczba_dobrych<<std::endl;
   Test.liczba_odp=4;
-  //procent=(x.liczba_dobrych/y.liczba_odp)*100;
-  //x=3;
-  //y=4;
-  //procent=(x/y)*100;
-  //std::ostringstream out;
-
-  //out << y;
-  //std::cout << out.str() << std::endl;
+  std::cout << Test.liczba_odp<<std::endl;
+  std::cout<< Procent_dobrych(Test) << std::endl;
   
-  CHECK(Procent_dobrych(test) == y );
+  CHECK(Procent_dobrych(Test) == y );
 }

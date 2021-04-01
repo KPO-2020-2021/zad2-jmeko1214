@@ -40,5 +40,9 @@ double modul2 (LZespolona Skl);
 ostream & operator << (ostream &StrmWyj, const LZespolona &LZesp);
 istream & operator >> (istream &StrmWej, LZespolona &LZesp);
 
+/*dodanie modyfikacji*/
+double arg(LZespolona Skl1);
+LZespolona operator += (LZespolona &Skl1, LZespolona const &Skl2);
+LZespolona operator /= (LZespolona &Skl1, LZespolona const &Skl2);
 
 #endif

@@ -3,13 +3,13 @@
 #include "LZespolona.hh"
 #include "WyrazenieZesp.hh"
 #include "Statystyki.hh"
+#define PI 3.141592
 
 using namespace std;
 
 
 int main(int argc, char **argv)
 {
-
   if (argc < 2) {
     cout << endl;
     cout << " Brak opcji okreslajacej rodzaj testu." << endl;
@@ -18,7 +18,6 @@ int main(int argc, char **argv)
     return 1;
   }
 
-
   BazaTestu   BazaT = { nullptr, 0, 0 };
 
   if (InicjalizujTest(&BazaT,argv[1]) == false) {
@@ -26,7 +25,6 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  
   cout << endl;
   cout << " Start testu arytmetyki zespolonej: " << argv[1] << endl;
   cout << endl;
@@ -35,9 +33,9 @@ int main(int argc, char **argv)
   LZespolona TwojaOdp;
   LZespolona Wynik;
   Statystyka Test;
+  LZespolona Z1;
 
   Inicjuj_staty(Test);
-  
   
   while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe))
     {
@@ -77,6 +75,9 @@ int main(int argc, char **argv)
   cout << "Koniec testu" << endl;
   cout << endl;
   Wyswietl_statystyki(Test);
-  cout << endl;
+  cout << endl << endl;
+  cout<<"Podaj wartosc glownego argumentu liczby zespolonej w postaci (a+bi):"<<endl;
+  cin>>Z1;
+  cout << "Argument glowny liczby zespolonej: " << Z1 << " wynosi: "<< arg(Z1)<<" radianow a w stopniach: " << arg(Z1)*180/PI<<" stopni."<<endl;
 
 }

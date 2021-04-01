@@ -29,6 +29,20 @@ TEST_CASE("Test LZespolona dzielenie przez skalar - standardowe z przyblizeniem"
     CHECK(x/t == y);
 }
 
+TEST_CASE("Test LZespolona - dzielenie rowna sie") {
+  LZespolona x, y, z;
+    z.re = 1;
+    z.im = 0;
+    
+    x.re = 2;
+    x.im = 1;
+
+    y.re = 2;
+    y.im = 1;
+   
+    CHECK(x/z == y);
+}
+
 TEST_CASE("Test LZespolona dzielenie przez skalar - zero") {
     LZespolona x;
     double t = 0;
